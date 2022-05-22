@@ -1,9 +1,10 @@
 import React, {useState, useEffect} from 'react';
 import { SearchPanel } from "./search-panel"
-import { List } from "./list"
+import { ListScreen } from "./list"
 import { cleanObject, useMount, useDebounce,useArray } from 'utils';
 import * as qs from 'qs';
 import {useHttp} from "../../utils/http"
+import { Button, List } from 'antd'
 
 const apiUrl = process.env.REACT_APP_API_URL;
 
@@ -30,12 +31,11 @@ export const ProjectListScreen = () => {
 
     return <div>
         <SearchPanel param={param} users={users} setParam={setParam} />
-        <List users={users} list={list} />
-        <button onClick={() => add({name: 'john', age: 19})}>添加john</button>
-        <ul>
-            {
-                value.map((item,index) => <li key={index}>{item.name}---{item.age}</li>)
-            }
-        </ul>
+        <ListScreen users={users} list={list} />
+        <Button onClick={() => add({name: 'john', age: 19})}>添加john</Button>
+        <List dataSource={value}
+            renderItem={(item,index) =>
+                <List.Item key={index}>{item.name} --- {item.age}</List.Item>
+            } />
     </div>
 }
