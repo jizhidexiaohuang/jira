@@ -5,6 +5,7 @@ import { cleanObject, useMount, useDebounce,useArray } from 'utils';
 import * as qs from 'qs';
 import {useHttp} from "../../utils/http"
 import { Button, List } from 'antd'
+import styled from "@emotion/styled"
 
 const apiUrl = process.env.REACT_APP_API_URL;
 
@@ -29,13 +30,18 @@ export const ProjectListScreen = () => {
         client('users').then(setUsers)
     })
 
-    return <div>
+    return <Container>
+        <h1>项目列表</h1>
         <SearchPanel param={param} users={users} setParam={setParam} />
         <ListScreen users={users} list={list} />
-        <Button onClick={() => add({name: 'john', age: 19})}>添加john</Button>
+        {/* <Button onClick={() => add({name: 'john', age: 19})}>添加john</Button>
         <List dataSource={value}
             renderItem={(item,index) =>
                 <List.Item key={index}>{item.name} --- {item.age}</List.Item>
-            } />
-    </div>
+            } /> */}
+    </Container>
 }
+
+const Container = styled.div`
+padding: 3.2rem;
+`
