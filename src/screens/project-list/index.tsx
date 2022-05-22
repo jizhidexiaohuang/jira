@@ -1,7 +1,7 @@
 import React, {useState, useEffect} from 'react';
 import { SearchPanel } from "./search-panel"
 import { List } from "./list"
-import { cleanObject, useMount, useDebounce } from 'utils';
+import { cleanObject, useMount, useDebounce,useArray } from 'utils';
 import * as qs from 'qs';
 
 const apiUrl = process.env.REACT_APP_API_URL;
@@ -9,6 +9,8 @@ const apiUrl = process.env.REACT_APP_API_URL;
 console.log(apiUrl)
 
 export const ProjectListScreen = () => {
+    const {value, add } = useArray([{name: 'jack', age: 19}])
+
     const [param, setParam] = useState({
         name: '',
         personId: ''
@@ -37,5 +39,11 @@ export const ProjectListScreen = () => {
     return <div>
         <SearchPanel param={param} users={users} setParam={setParam} />
         <List users={users} list={list} />
+        <button onClick={() => add({name: 'john', age: 19})}>添加john</button>
+        <ul>
+            {
+                value.map((item,index) => <li key={index}>{item.name}---{item.age}</li>)
+            }
+        </ul>
     </div>
 }
