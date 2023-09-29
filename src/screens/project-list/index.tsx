@@ -15,7 +15,7 @@ export const ProjectListScreen = () => {
 
   const [list, setList] = useState([]);
 
-  const debounceParam = useDebounce(param, 2000);
+  const debounceParam = useDebounce(param, 200);
   useEffect(() => {
     fetch(
       `${apiUrl}/projects?${qs.stringify(cleanObject(debounceParam))}`
