@@ -24,7 +24,7 @@ export const ProjectListScreen = () => {
     personId: "",
   });
 
-  useDocumentTitle("项目列表");
+  useDocumentTitle("项目列表", false);
 
   const debounceParam = useDebounce(param, 200);
   const { isLoading, error, data: list } = useProject(debounceParam);
