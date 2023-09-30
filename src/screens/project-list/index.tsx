@@ -3,7 +3,12 @@ import { List } from "./list";
 import { SearchPanel } from "./search-panel";
 import { useState, useEffect } from "react";
 import * as qs from "qs";
-import { cleanObject, useDebounce, useMount } from "../../utils";
+import {
+  cleanObject,
+  useDebounce,
+  useDocumentTitle,
+  useMount,
+} from "../../utils";
 import { useHttp } from "../../utils/http";
 import styled from "@emotion/styled";
 import { Typography } from "antd";
@@ -18,6 +23,8 @@ export const ProjectListScreen = () => {
     name: "",
     personId: "",
   });
+
+  useDocumentTitle("项目列表");
 
   const debounceParam = useDebounce(param, 200);
   const { isLoading, error, data: list } = useProject(debounceParam);
