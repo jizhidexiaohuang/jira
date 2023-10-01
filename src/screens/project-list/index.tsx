@@ -17,6 +17,7 @@ import { Project } from "./list";
 import { useProject } from "../../utils/project";
 import { useUsers } from "../../utils/user";
 import { useUrlQueryParam } from "../../utils/url";
+import { useProjectSearchParam } from "./util";
 
 const apiUrl = process.env.REACT_APP_API_URL;
 export const ProjectListScreen = () => {
@@ -27,10 +28,8 @@ export const ProjectListScreen = () => {
 
   useDocumentTitle("项目列表", false);
 
-  const [param, setParam] = useUrlQueryParam(["name", "personId"]);
-
-  const debounceParam = useDebounce(param, 200);
-  const { isLoading, error, data: list } = useProject(debounceParam);
+  const [param, setParam] = useProjectSearchParam();
+  const { isLoading, error, data: list } = useProject(useDebounce(param, 200));
   const { data: users } = useUsers();
   return (
     <Container>
