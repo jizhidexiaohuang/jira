@@ -16,15 +16,18 @@ import { useAsync } from "../../utils/use-async";
 import { Project } from "./list";
 import { useProject } from "../../utils/project";
 import { useUsers } from "../../utils/user";
+import { useUrlQueryParam } from "../../utils/url";
 
 const apiUrl = process.env.REACT_APP_API_URL;
 export const ProjectListScreen = () => {
-  const [param, setParam] = useState({
+  const [, setParam] = useState({
     name: "",
     personId: "",
   });
 
   useDocumentTitle("项目列表", false);
+
+  const [param] = useUrlQueryParam(["name", "personId"]);
 
   const debounceParam = useDebounce(param, 200);
   const { isLoading, error, data: list } = useProject(debounceParam);
@@ -40,6 +43,8 @@ export const ProjectListScreen = () => {
     </Container>
   );
 };
+
+ProjectListScreen.whyDidYouRender = true;
 
 const Container = styled.div`
   padding: 3.2rem;
