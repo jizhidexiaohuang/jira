@@ -33,6 +33,8 @@ export const useDebounce = <V>(value: V, delay?: number): V => {
   return debounceValue;
 };
 
+export const resetRoute = () => (window.location.href = window.location.origin);
+
 export const useDocumentTitle = (title: string, keepOnUnmount = true) => {
   const oldTitle = useRef(document.title).current;
 

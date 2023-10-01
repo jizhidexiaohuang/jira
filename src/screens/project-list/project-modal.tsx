@@ -1,0 +1,16 @@
+import { Drawer } from "antd";
+import React from "react";
+export const ProjectModal = (props: {
+  projectModalOpen: boolean;
+  onClose: () => void;
+}) => {
+  return (
+    <Drawer
+      visible={props.projectModalOpen}
+      width={"100%"}
+      onClose={props.onClose}
+    >
+      <h1>抽屉</h1>
+    </Drawer>
+  );
+};
