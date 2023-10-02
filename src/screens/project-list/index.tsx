@@ -14,11 +14,11 @@ import styled from "@emotion/styled";
 import { Button, Typography } from "antd";
 import { useAsync } from "../../utils/use-async";
 import { Project } from "./list";
-import { useProject } from "../../utils/project";
+import { useProjects } from "../../utils/project";
 import { useUsers } from "../../utils/user";
 import { useUrlQueryParam } from "../../utils/url";
 import { useProjectModal, useProjectSearchParam } from "./util";
-import { ButtonNoPadding, Row } from "../../components/lib";
+import { ButtonNoPadding, ErrorBox, Row } from "../../components/lib";
 
 const apiUrl = process.env.REACT_APP_API_URL;
 export const ProjectListScreen = () => {
@@ -26,12 +26,7 @@ export const ProjectListScreen = () => {
   useDocumentTitle("项目列表", false);
 
   const [param, setParam] = useProjectSearchParam();
-  const {
-    isLoading,
-    error,
-    data: list,
-    retry,
-  } = useProject(useDebounce(param, 200));
+  const { isLoading, error, data: list } = useProjects(useDebounce(param, 200));
   const { data: users } = useUsers();
   return (
     <Container>
@@ -42,15 +37,8 @@ export const ProjectListScreen = () => {
         </ButtonNoPadding>
       </Row>
       <SearchPanel param={param} setParam={setParam} users={users || []} />
-      {error ? (
-        <Typography.Text type={"danger"}>{error.message}</Typography.Text>
-      ) : null}
-      <List
-        refresh={retry}
-        loading={isLoading}
-        dataSource={list || []}
-        users={users || []}
-      />
+      <ErrorBox error={error} />
+      <List loading={isLoading} dataSource={list || []} users={users || []} />
     </Container>
   );
 };

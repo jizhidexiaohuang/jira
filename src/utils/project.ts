@@ -4,54 +4,56 @@ import { useAsync } from "./use-async";
 import { useEffect } from "react";
 import { useHttp } from "./http";
 import { cleanObject } from "./index";
+import { useQuery, useMutation, useQueryClient } from "react-query";
 
-export const useProject = (param?: Partial<Project>) => {
+export const useProjects = (param?: Partial<Project>) => {
   const client = useHttp();
 
-  const { run, ...result } = useAsync<Project[]>();
-
-  const fetchProjects = useCallback(
-    () => client("projects", { data: cleanObject(param || {}) }),
-    [client, param]
+  return useQuery<Project[]>(["projects", param], () =>
+    client("projects", { data: cleanObject(param || {}) })
   );
-
-  useEffect(() => {
-    run(fetchProjects(), { retry: fetchProjects });
-  }, [param, run, fetchProjects]);
-
-  return result;
 };
 
 export const useEditProject = () => {
   const client = useHttp();
-  const { run, ...asyncResult } = useAsync();
-  const mutate = (params: Partial<Project>) => {
-    return run(
+
+  const queryClient = useQueryClient();
+  return useMutation(
+    (params: Partial<Project>) =>
       client(`projects/${params.id}`, {
         method: "PATCH",
         data: params,
-      })
-    );
-  };
-  return {
-    mutate,
-    ...asyncResult,
-  };
+      }),
+    {
+      onSuccess: () => queryClient.invalidateQueries("projects"),
+    }
+  );
 };
 
 export const useAddProject = () => {
   const client = useHttp();
-  const { run, ...asyncResult } = useAsync();
-  const mutate = (params: Partial<Project>) => {
-    return run(
-      client(`/projects/${params.id}`, {
+  const queryClient = useQueryClient();
+
+  return useMutation(
+    (params: Partial<Project>) =>
+      client(`projects`, {
         method: "POST",
         data: params,
-      })
-    );
-  };
-  return {
-    mutate,
-    ...asyncResult,
-  };
+      }),
+    {
+      onSuccess: () => queryClient.invalidateQueries("projects"),
+    }
+  );
+};
+
+export const useProject = (id?: number) => {
+  const client = useHttp();
+
+  return useQuery<Project>(
+    ["project", { id }],
+    () => client(`projects/${id}`),
+    {
+      enabled: Boolean(id),
+    }
+  );
 };
