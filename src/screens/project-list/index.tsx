@@ -17,16 +17,12 @@ import { Project } from "./list";
 import { useProject } from "../../utils/project";
 import { useUsers } from "../../utils/user";
 import { useUrlQueryParam } from "../../utils/url";
-import { useProjectSearchParam } from "./util";
-import { Row } from "../../components/lib";
+import { useProjectModal, useProjectSearchParam } from "./util";
+import { ButtonNoPadding, Row } from "../../components/lib";
 
 const apiUrl = process.env.REACT_APP_API_URL;
-export const ProjectListScreen = (props: { projectButton: JSX.Element }) => {
-  // const [, setParam] = useState({
-  //   name: "",
-  //   personId: "",
-  // });
-
+export const ProjectListScreen = () => {
+  const { open } = useProjectModal();
   useDocumentTitle("项目列表", false);
 
   const [param, setParam] = useProjectSearchParam();
@@ -41,14 +37,15 @@ export const ProjectListScreen = (props: { projectButton: JSX.Element }) => {
     <Container>
       <Row between={true}>
         <h1>项目列表</h1>
-        {props.projectButton}
+        <ButtonNoPadding onClick={open} type={"link"}>
+          创建项目
+        </ButtonNoPadding>
       </Row>
       <SearchPanel param={param} setParam={setParam} users={users || []} />
       {error ? (
         <Typography.Text type={"danger"}>{error.message}</Typography.Text>
       ) : null}
       <List
-        projectButton={props.projectButton}
         refresh={retry}
         loading={isLoading}
         dataSource={list || []}
