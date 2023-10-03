@@ -1,7 +1,10 @@
+import { useCallback } from "react";
 import { useLocation } from "react-router";
 import { useProject } from "../../utils/project";
 import { useUrlQueryParam } from "../../utils/url";
 import { useMemo } from "react";
+import { useDebounce } from "../../utils/index";
+import { useTask } from "../../utils/task";
 
 export const useProjectIdInUrl = () => {
   const { pathname } = useLocation();
@@ -25,6 +28,9 @@ export const useTaskSearchParams = () => {
     "tagId",
   ]);
   const projectId = useProjectIdInUrl();
+  //加上这行就无法清除输入框
+  const debounceName = useDebounce(param.name, 2000);
+
   return useMemo(
     () => ({
       projectId,
@@ -38,3 +44,31 @@ export const useTaskSearchParams = () => {
 };
 
 export const useTasksQueryKey = () => ["tasks", useTaskSearchParams()];
+
+export const useTaskModal = () => {
+  const [{ editingTaskId }, setEditingTaskId] = useUrlQueryParam([
+    "editingTaskId",
+  ]);
+
+  const { data: editingTask, isLoading } = useTask(Number(editingTaskId));
+
+  const startEdit = useCallback(
+    (id: number) => {
+      setEditingTaskId({ editingTaskId: id });
+    },
+    [setEditingTaskId]
+  );
+
+  const close = useCallback(
+    () => setEditingTaskId({ editingTaskId: "" }),
+    [setEditingTaskId]
+  );
+
+  return {
+    editingTaskId,
+    editingTask,
+    startEdit,
+    close,
+    isLoading,
+  };
+};
