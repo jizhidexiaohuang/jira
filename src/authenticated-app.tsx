@@ -3,7 +3,7 @@ import { ProjectListScreen } from "./screens/project-list";
 import { useAuth } from "./context/auth-context";
 import { Button, Dropdown, Menu } from "antd";
 import styled from "@emotion/styled";
-import { Row } from "../src/components/lib";
+import { Row, ScreenContainer } from "../src/components/lib";
 import { ReactComponent as SoftwareLogo } from "./assets/software-logo.svg";
 import { Navigate, Route, Routes } from "react-router";
 import { BrowserRouter as Router } from "react-router-dom";
@@ -89,5 +89,6 @@ const HeaderLeft = styled(Row)``;
 
 const HeaderRight = styled.div``;
 const Main = styled.main`
-  grid-area: main;
+  display: flex;
+  overflow: hidden;
 `;
