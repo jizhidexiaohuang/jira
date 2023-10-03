@@ -46,6 +46,21 @@ export const useAddProject = () => {
   );
 };
 
+export const useDeleteProject = () => {
+  const client = useHttp();
+  const queryClient = useQueryClient();
+
+  return useMutation(
+    ({ id }: { id: Number }) =>
+      client(`projects/${id}`, {
+        method: "DELETE",
+      }),
+    {
+      onSuccess: () => queryClient.invalidateQueries("projects"),
+    }
+  );
+};
+
 export const useProject = (id?: number) => {
   const client = useHttp();
 
