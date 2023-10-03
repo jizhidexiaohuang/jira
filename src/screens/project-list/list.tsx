@@ -21,6 +21,7 @@ export const List = ({ users, ...props }: ListProps) => {
   return (
     <Table
       pagination={false}
+      rowKey={(project) => project.id}
       columns={[
         {
           title: <Pin checked={true} disabled={true} />,

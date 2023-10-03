@@ -32,7 +32,7 @@ export const ProjectModal = () => {
   return (
     <Drawer
       forceRender={true}
-      visible={projectModalOpen}
+      open={projectModalOpen}
       title={title}
       width={"100%"}
       closable={true}

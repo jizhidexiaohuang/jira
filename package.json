@@ -13,6 +13,7 @@
     "@types/node": "^16.18.38",
     "@types/react": "^18.2.14",
     "@types/react-dom": "^18.2.6",
+    "@types/react-query": "^1.2.9",
     "@welldone-software/why-did-you-render": "^7.0.1",
     "antd": "^5.9.4",
     "craco-less": "^3.0.1",
