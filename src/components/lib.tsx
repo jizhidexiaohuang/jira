@@ -63,5 +63,6 @@ export const ScreenContainer = styled.div`
   padding: 3.2rem;
   width: 100%;
   display: flex;
+  height: calc(100vh - 64px);
   flex-direction: column;
 `;
