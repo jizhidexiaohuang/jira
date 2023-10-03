@@ -42,6 +42,21 @@ export const useEditTask = () => {
   );
 };
 
+export const useDeleteTask = () => {
+  const client = useHttp();
+  const queryClient = useQueryClient();
+
+  return useMutation(
+    ({ id }: { id: Number }) =>
+      client(`tasks/${id}`, {
+        method: "DELETE",
+      }),
+    {
+      onSuccess: () => queryClient.invalidateQueries("tasks"),
+    }
+  );
+};
+
 export const useTask = (id?: number) => {
   const client = useHttp();
 
