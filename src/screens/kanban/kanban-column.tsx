@@ -7,6 +7,8 @@ import taskIcon from "../../assets/task.svg";
 import bugIcon from "../../assets/bug.svg";
 import styled from "@emotion/styled";
 import { Card } from "antd";
+import { CreateKanban } from "./create-kanban";
+import { CreateTask } from "./create-task";
 
 const TaskTypeIcon = ({ id }: { id: number }) => {
   const { data: taskTypes } = useTaskTypes();
@@ -31,11 +33,12 @@ export const KanbanColumn = ({ kanban }: { kanban: Kanban }) => {
           </Card>
         ))}
       </TaskContainer>
+      <CreateTask kanbanId={kanban.id}></CreateTask>
     </Container>
   );
 };
 
-const Container = styled.div`
+export const Container = styled.div`
   min-width: 27rem;
   border-radius: 6px;
   background-color: rgb(244, 245, 247);
@@ -47,7 +50,7 @@ const Container = styled.div`
 
 const TaskContainer = styled.div`
   overflow: scroll;
-  flex: 1;
+  /* flex: 1; */
   ::webkit-scroll {
     display: none;
   }

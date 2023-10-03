@@ -8,6 +8,7 @@ import { SearchPanel } from "./search-panel";
 import { ScreenContainer } from "../../components/lib";
 import { useTasks } from "../../utils/task";
 import { Spin } from "antd";
+import { CreateKanban } from "./create-kanban";
 
 export const KanbanScreen = () => {
   useDocumentTitle("看板列表");
@@ -29,13 +30,14 @@ export const KanbanScreen = () => {
           {kanbans?.map((kanban) => (
             <KanbanColumn kanban={kanban} key={kanban.id} />
           ))}
+          <CreateKanban />
         </ColumnsContainer>
       )}
     </ScreenContainer>
   );
 };
 
-const ColumnsContainer = styled.div`
+export const ColumnsContainer = styled.div`
   display: flex;
   flex: 1;
   overflow-x: scroll;
