@@ -3,7 +3,6 @@ import React, { useEffect } from "react";
 import { useProjectModal } from "./util";
 import { UserSelect } from "../../components/user-select";
 import { useEditProject, useAddProject } from "../../utils/project";
-import { useForm } from "antd/es/form/Form";
 import { ErrorBox } from "../../components/lib";
 import styled from "@emotion/styled";
 export const ProjectModal = () => {
@@ -12,7 +11,7 @@ export const ProjectModal = () => {
   const useMutateProject = editingProject ? useEditProject : useAddProject;
 
   const { mutateAsync, error, isLoading: mutateLoading } = useMutateProject();
-  const [form] = useForm();
+  const [form] = Form.useForm();
   const onFinish = (values: any) => {
     mutateAsync({ ...editingProject, ...values }).then(() => {
       form.resetFields();
