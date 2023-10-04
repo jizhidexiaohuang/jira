@@ -10,7 +10,7 @@ import styled from "@emotion/styled";
 import { Button, Card, Dropdown, Menu, Modal } from "antd";
 import { CreateKanban } from "./create-kanban";
 import { CreateTask } from "./create-task";
-import { Mark } from "../../components/mask";
+import { Mark } from "../../components/mark";
 import { useDeleteKanban } from "../../utils/kanban";
 import { Row } from "../../components/lib";
 import { Drag, Drop, DropChild } from "../../components/drag-and-drop";
