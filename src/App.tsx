@@ -17,9 +17,9 @@ function App() {
     <div className="App">
       {/* <ProjectListScreen /> */}
       <ErrorBoundary fallbackRender={FullPageErrorFallback}>
-        {/* <React.Suspense> */}
-        {user ? <AuthenticatedApp /> : <UnauthenticatedApp />}
-        {/* </React.Suspense> */}
+        <React.Suspense>
+          {user ? <AuthenticatedApp /> : <UnauthenticatedApp />}
+        </React.Suspense>
       </ErrorBoundary>
     </div>
   );
