@@ -21,17 +21,18 @@ export const Drop = ({ children, ...props }: DropProps) => {
             provided,
           });
         }
-        return <div></div>;
+        return <div />;
       }}
     </Droppable>
   );
 };
 
-type DropChildrenProps = Partial<
+type DropChildProps = Partial<
   { provided: DroppableProvided } & DroppableProvidedProps
 > &
   React.HTMLAttributes<HTMLDivElement>;
-export const DropChildren = React.forwardRef<HTMLDivElement, DropChildrenProps>(
+
+export const DropChild = React.forwardRef<HTMLDivElement, DropChildProps>(
   ({ children, ...props }, ref) => (
     <div ref={ref} {...props}>
       {children}

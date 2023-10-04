@@ -1,3 +1,4 @@
+import React from "react";
 import { useTasks } from "../../utils/task";
 import { Task } from "../../types/task";
 import { Kanban } from "../../types/kanban";
@@ -69,15 +70,18 @@ const More = ({ kanban }: { kanban: Kanban }) => {
   );
 };
 
-export const KanbanColumn = ({ kanban }: { kanban: Kanban }) => {
+export const KanbanColumn = React.forwardRef<
+  HTMLDivElement,
+  { kanban: Kanban }
+>(({ kanban, ...props }, ref) => {
   const { data: allTasks } = useTasks(useTaskSearchParams());
   const tasks = allTasks?.filter((i) => i.kanbanId === kanban.id);
 
   return (
-    <Container>
+    <Container ref={ref} {...props}>
       <Row between={true}>
         <h3>{kanban.name}</h3>
-        <More kanban={kanban} />
+        <More kanban={kanban} key={kanban.id} />
       </Row>
       <TaskContainer>
         {tasks?.map((task) => (
@@ -87,7 +91,7 @@ export const KanbanColumn = ({ kanban }: { kanban: Kanban }) => {
       <CreateTask kanbanId={kanban.id}></CreateTask>
     </Container>
   );
-};
+});
 
 export const Container = styled.div`
   min-width: 27rem;
