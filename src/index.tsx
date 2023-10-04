@@ -7,6 +7,7 @@ import reportWebVitals from "./reportWebVitals";
 import { DevTools, loadServer } from "jira-dev-tool";
 import "antd/dist/antd";
 import { AppProviders } from "./context";
+import { Profiler } from "./components/profiler";
 
 const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement
@@ -14,10 +15,12 @@ const root = ReactDOM.createRoot(
 loadServer(() =>
   root.render(
     <React.StrictMode>
+      {/* <Profiler id={"root"}> */}
       <AppProviders>
         <DevTools />
         <App />
       </AppProviders>
+      {/* </Profiler> */}
     </React.StrictMode>
   )
 );
