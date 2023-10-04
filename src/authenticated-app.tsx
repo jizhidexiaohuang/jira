@@ -12,6 +12,7 @@ import { ProjectModal } from "./screens/project-list/project-modal";
 import { ProjectPopover } from "./components/project-popover";
 import { resetRoute } from "./utils/index";
 import { ButtonNoPadding } from "./components/lib";
+import { UserPopover } from "./components/user-popover";
 
 export const AuthenticatedApp = () => {
   return (
@@ -47,7 +48,7 @@ const PageHeader = () => {
           ></SoftwareLogo>
         </ButtonNoPadding>
         <ProjectPopover />
-        <span>用户</span>
+        <UserPopover />
       </HeaderLeft>
       <HeaderRight>
         <User />
