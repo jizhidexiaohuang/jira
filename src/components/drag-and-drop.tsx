@@ -5,6 +5,7 @@ import {
   Droppable,
   DroppableProps,
   DroppableProvided,
+  DroppableProvidedProps,
 } from "react-beautiful-dnd";
 
 type DropProps = Omit<DroppableProps, "children"> & { children: ReactNode };
@@ -27,11 +28,16 @@ export const Drop = ({ children, ...props }: DropProps) => {
 };
 
 type DropChildrenProps = Partial<
-  { provided: DroppableProvided } & DroppableProvided &
-    React.HTMLAttributes<HTMLDivElement>
->;
+  { provided: DroppableProvided } & DroppableProvidedProps
+> &
+  React.HTMLAttributes<HTMLDivElement>;
 export const DropChildren = React.forwardRef<HTMLDivElement, DropChildrenProps>(
-  (props, ref) => <div ref={ref} {...props} />
+  ({ children, ...props }, ref) => (
+    <div ref={ref} {...props}>
+      {children}
+      {props.provided?.placeholder}
+    </div>
+  )
 );
 
 type DragProps = Omit<DraggableProps, "children"> & { children: ReactNode };
