@@ -14,7 +14,7 @@ import { resetRoute } from "./utils/index";
 import { ButtonNoPadding } from "./components/lib";
 import { UserPopover } from "./components/user-popover";
 
-export const AuthenticatedApp = () => {
+export default () => {
   return (
     <div>
       <Container>
