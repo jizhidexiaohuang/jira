@@ -40,3 +40,27 @@ export const useDeleteKanban = () => {
     }
   );
 };
+
+export interface SortProps {
+  fromId: number | undefined;
+  referenceId: number | undefined;
+  type: "before" | "after";
+  fromKanbanId?: number;
+  toKanbanId?: number;
+}
+
+export const useReorderKanban = () => {
+  const client = useHttp();
+  const queryClient = useQueryClient();
+
+  return useMutation(
+    (param: SortProps) =>
+      client("kanbans/reorder", {
+        data: param,
+        method: "POST",
+      }),
+    {
+      onSuccess: () => queryClient.invalidateQueries("kanbans"),
+    }
+  );
+};
