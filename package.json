@@ -36,7 +36,10 @@
     "build": "craco build",
     "test": "craco test",
     "eject": "react-scripts eject",
+    "predeploy":"npm run build",
+    "deploy":"gh-pages -d build -r git@github.com:jizhidexiaohuang/jizhidexiaohuang.github.io.git -b master",
     "json-server": "json-server __json_server_mock__/db.json --watch --port 3001 --middlewares ./__json_server_mock__/middleware.js"
+
   },
   "eslintConfig": {
     "extends": [
@@ -58,6 +61,7 @@
   },
   "devDependencies": {
     "@types/react-beautiful-dnd": "^13.1.5",
+    "gh-pages": "^6.0.0",
     "json-server": "^0.17.3"
   }
 }
