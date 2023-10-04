@@ -9,8 +9,8 @@ import { useQuery, useMutation, useQueryClient } from "react-query";
 export const useProjects = (param?: Partial<Project>) => {
   const client = useHttp();
 
-  return useQuery<Project[]>(["projects", param], () =>
-    client("projects", { data: cleanObject(param || {}) })
+  return useQuery<Project[]>(["projects", cleanObject(param)], () =>
+    client("projects", { data: param })
   );
 };
 
