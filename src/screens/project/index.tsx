@@ -5,6 +5,7 @@ import { EpicScreen } from "../epic/index";
 import { ScreenContainer } from "../../components/lib";
 import styled from "@emotion/styled";
 import { Menu } from "antd";
+import { Fragment } from "react";
 
 const useRouteType = () => {
   const units = useLocation().pathname.split("/");
@@ -28,7 +29,8 @@ export const ProjectScreen = () => {
         <Routes>
           <Route path={"/kanban"} element={<KanbanScreen />}></Route>
           <Route path={"/epic"} element={<EpicScreen />}></Route>
-          <Route index element={<KanbanScreen />}></Route>
+          {/* <Route index element={<KanbanScreen />}></Route> */}
+          <Route index element={<Navigate to={"kanban"} />}></Route>
         </Routes>
       </Main>
     </Container>
