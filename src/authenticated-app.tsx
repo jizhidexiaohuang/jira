@@ -6,7 +6,6 @@ import styled from "@emotion/styled";
 import { Row, ScreenContainer } from "../src/components/lib";
 import { ReactComponent as SoftwareLogo } from "./assets/software-logo.svg";
 import { Navigate, Route, Routes } from "react-router";
-import { BrowserRouter as Router } from "react-router-dom";
 import { ProjectScreen } from "./screens/project/index";
 import { ProjectModal } from "./screens/project-list/project-modal";
 import { ProjectPopover } from "./components/project-popover";
@@ -18,20 +17,18 @@ export default () => {
   return (
     <div>
       <Container>
-        <Router>
-          <PageHeader />
-          <Main>
-            <Routes>
-              <Route path={"/projects"} element={<ProjectListScreen />}></Route>
-              <Route
-                path={"/projects/:projectId/*"}
-                element={<ProjectScreen />}
-              ></Route>
-              <Route path={"/"} element={<Navigate to={"/projects"} />}></Route>
-            </Routes>
-          </Main>
-          <ProjectModal />
-        </Router>
+        <PageHeader />
+        <Main>
+          <Routes>
+            <Route path={"/projects"} element={<ProjectListScreen />}></Route>
+            <Route
+              path={"/projects/:projectId/*"}
+              element={<ProjectScreen />}
+            ></Route>
+            <Route path={"/"} element={<Navigate to={"/projects"} />}></Route>
+          </Routes>
+        </Main>
+        <ProjectModal />
       </Container>
     </div>
   );
